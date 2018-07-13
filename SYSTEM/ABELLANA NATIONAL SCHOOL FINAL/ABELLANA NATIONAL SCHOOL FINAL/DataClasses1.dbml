@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ANS_DATABASE" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=ANS_DATABASE;Integrated Security=True" SettingsObjectName="ABELLANA_NATIONAL_SCHOOL_FINAL.Properties.Settings" SettingsPropertyName="ANS_DATABASEConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TBL_BOOKS" Member="TBL_BOOKs">
+    <Type Name="TBL_BOOK">
+      <Column Name="B_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="B_BOOKNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="B_YEARLEVEL" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_USERTYPE" Member="TBL_USERTYPEs">
+    <Type Name="TBL_USERTYPE">
+      <Column Name="USER_TYPEID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USER_TYPE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="TBL_USERTYPE_TBL_USER" Member="TBL_USERs" ThisKey="USER_TYPEID" OtherKey="USER_TYPEID" Type="TBL_USER" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_GRADE" Member="TBL_GRADEs">
+    <Type Name="TBL_GRADE">
+      <Column Name="GRADE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ST_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GRADEPERIOD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GRADE" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="GRADESUBJECT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SUBJECT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_STUDENT_TBL_GRADE" Member="TBL_STUDENT" ThisKey="ST_ID" OtherKey="ST_ID" Type="TBL_STUDENT" IsForeignKey="true" />
+      <Association Name="TBL_SUBJECT_TBL_GRADE" Member="TBL_SUBJECT" ThisKey="SUBJECT_ID" OtherKey="SUBJECT_ID" Type="TBL_SUBJECT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_PARENT" Member="TBL_PARENTs">
+    <Type Name="TBL_PARENT">
+      <Column Name="P_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="P_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="P_CONTACT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="P_OCCUPATION" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="P_TYPE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_PARENT_TBL_STUDENT" Member="TBL_STUDENTs" ThisKey="P_ID" OtherKey="P_ID" Type="TBL_STUDENT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_PAYMENTDETAILS" Member="TBL_PAYMENTDETAILs">
+    <Type Name="TBL_PAYMENTDETAIL">
+      <Column Name="PD_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ST_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PAYMENTDESC" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PAYMENTAMOUNT" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_STUDENT_TBL_PAYMENTDETAIL" Member="TBL_STUDENT" ThisKey="ST_ID" OtherKey="ST_ID" Type="TBL_STUDENT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_REQUIRMENTS" Member="TBL_REQUIRMENTs">
+    <Type Name="TBL_REQUIRMENT">
+      <Column Name="REQ_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="REQ_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="REQ_DETAILS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="REQ_ADDED" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_STUDENT_TBL_REQUIRMENT" Member="TBL_STUDENT" ThisKey="ST_ID" OtherKey="ST_ID" Type="TBL_STUDENT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_SECTION" Member="TBL_SECTIONs">
+    <Type Name="TBL_SECTION">
+      <Column Name="SEC_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SEC_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SEC_CAPACITY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_SECTION_TBL_SECTIONSUBJECT" Member="TBL_SECTIONSUBJECTs" ThisKey="SEC_ID" OtherKey="SEC_ID" Type="TBL_SECTIONSUBJECT" />
+      <Association Name="TBL_SECTION_TBL_STUDENT" Member="TBL_STUDENTs" ThisKey="SEC_ID" OtherKey="SEC_ID" Type="TBL_STUDENT" />
+      <Association Name="TBL_SECTION_TBL_TEACHER" Member="TBL_TEACHERs" ThisKey="SEC_ID" OtherKey="SEC_ID" Type="TBL_TEACHER" />
+      <Association Name="TBL_SECTION_TBL_TEACHERSECTION" Member="TBL_TEACHERSECTIONs" ThisKey="SEC_ID" OtherKey="SECSUB_ID" Type="TBL_TEACHERSECTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_SECTIONSUBJECT" Member="TBL_SECTIONSUBJECTs">
+    <Type Name="TBL_SECTIONSUBJECT">
+      <Column Name="SECSUB_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SUBJECT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SEC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_SECTION_TBL_SECTIONSUBJECT" Member="TBL_SECTION" ThisKey="SEC_ID" OtherKey="SEC_ID" Type="TBL_SECTION" IsForeignKey="true" />
+      <Association Name="TBL_SUBJECT_TBL_SECTIONSUBJECT" Member="TBL_SUBJECT" ThisKey="SUBJECT_ID" OtherKey="SUBJECT_ID" Type="TBL_SUBJECT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_STUDENT" Member="TBL_STUDENTs">
+    <Type Name="TBL_STUDENT">
+      <Column Name="ST_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ST_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ST_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_YEARLEVEL" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_SCHOOLYEAR" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_BIRTHDATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ST_AGE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ST_BIRTHPLACE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_ADDRESS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_GENDER" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_CONTACTNUMBER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ST_HEIGHT" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_WEIGHT" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_BLOODPRESSURE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="P_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SEC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_STUDENT_TBL_GRADE" Member="TBL_GRADEs" ThisKey="ST_ID" OtherKey="ST_ID" Type="TBL_GRADE" />
+      <Association Name="TBL_STUDENT_TBL_PAYMENTDETAIL" Member="TBL_PAYMENTDETAILs" ThisKey="ST_ID" OtherKey="ST_ID" Type="TBL_PAYMENTDETAIL" />
+      <Association Name="TBL_STUDENT_TBL_REQUIRMENT" Member="TBL_REQUIRMENTs" ThisKey="ST_ID" OtherKey="ST_ID" Type="TBL_REQUIRMENT" />
+      <Association Name="TBL_SECTION_TBL_STUDENT" Member="TBL_SECTION" ThisKey="SEC_ID" OtherKey="SEC_ID" Type="TBL_SECTION" IsForeignKey="true" />
+      <Association Name="TBL_PARENT_TBL_STUDENT" Member="TBL_PARENT" ThisKey="P_ID" OtherKey="P_ID" Type="TBL_PARENT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_SUBJECT" Member="TBL_SUBJECTs">
+    <Type Name="TBL_SUBJECT">
+      <Column Name="SUBJECT_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SUBJECT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_SUBJECT_TBL_GRADE" Member="TBL_GRADEs" ThisKey="SUBJECT_ID" OtherKey="SUBJECT_ID" Type="TBL_GRADE" />
+      <Association Name="TBL_SUBJECT_TBL_SECTIONSUBJECT" Member="TBL_SECTIONSUBJECTs" ThisKey="SUBJECT_ID" OtherKey="SUBJECT_ID" Type="TBL_SECTIONSUBJECT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_TEACHER" Member="TBL_TEACHERs">
+    <Type Name="TBL_TEACHER">
+      <Column Name="T_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="T_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="T_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_GENDER" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="T_BIRTHDATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="T_CONTACTNUMBER" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SEC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_SECTION_TBL_TEACHER" Member="TBL_SECTION" ThisKey="SEC_ID" OtherKey="SEC_ID" Type="TBL_SECTION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_TEACHERSCHEDULE" Member="TBL_TEACHERSCHEDULEs">
+    <Type Name="TBL_TEACHERSCHEDULE">
+      <Column Name="TSCHED_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TIMESTART" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TIMEEND" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_TEACHERSECTION_TBL_TEACHERSCHEDULE" Member="TBL_TEACHERSECTION" ThisKey="TS_ID" OtherKey="TS_ID" Type="TBL_TEACHERSECTION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_TEACHERSECTION" Member="TBL_TEACHERSECTIONs">
+    <Type Name="TBL_TEACHERSECTION">
+      <Column Name="TS_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SECSUB_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_TEACHERSECTION_TBL_TEACHERSCHEDULE" Member="TBL_TEACHERSCHEDULEs" ThisKey="TS_ID" OtherKey="TS_ID" Type="TBL_TEACHERSCHEDULE" />
+      <Association Name="TBL_SECTION_TBL_TEACHERSECTION" Member="TBL_SECTION" ThisKey="SECSUB_ID" OtherKey="SEC_ID" Type="TBL_SECTION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_USERS" Member="TBL_USERs">
+    <Type Name="TBL_USER">
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USER_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_USERNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_CONTACT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="USER_DATEADDED" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="USER_CREATOR" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_TYPEID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_IMAGE" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="TBL_USERTYPE_TBL_USER" Member="TBL_USERTYPE" ThisKey="USER_TYPEID" OtherKey="USER_TYPEID" Type="TBL_USERTYPE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.View_User" Member="View_Users">
+    <Type Name="View_User">
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="USER_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_USERNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_CONTACT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="USER_DATEADDED" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="USER_CREATOR" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_TYPE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.SP_CHANGEPASSWORD" Method="SP_CHANGEPASSWORD">
+    <Parameter Name="USER_ID" Parameter="uSER_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="USER_PASSWORD" Parameter="uSER_PASSWORD" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_VERIFYPASSWORD" Method="SP_VERIFYPASSWORD">
+    <Parameter Name="USER_ID" Parameter="uSER_ID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_PASSWORD" Parameter="uSER_PASSWORD" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="SP_VERIFYPASSWORDResult">
+      <Column Name="USER_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_STSAVE" Method="SP_STSAVE">
+    <Parameter Name="ST_FIRSTNAME" Parameter="sT_FIRSTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_MIDDLENAME" Parameter="sT_MIDDLENAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_LASTNAME" Parameter="sT_LASTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_YEARLEVEL" Parameter="sT_YEARLEVEL" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_SCHOOLYEAR" Parameter="sT_SCHOOLYEAR" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_BIRTHDATE" Parameter="sT_BIRTHDATE" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ST_AGE" Parameter="sT_AGE" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ST_BIRTHPLACE" Parameter="sT_BIRTHPLACE" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_ADDRESS" Parameter="sT_ADDRESS" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_GENDER" Parameter="sT_GENDER" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_CONTACTNUMBER" Parameter="sT_CONTACTNUMBER" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ISACTIVE" Parameter="iSACTIVE" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="ST_HEIGHT" Parameter="sT_HEIGHT" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="ST_WEIGHT" Parameter="sT_WEIGHT" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="ST_BLOODPRESSURE" Parameter="sT_BLOODPRESSURE" Type="System.Int32" DbType="Int" />
+    <Parameter Name="P_ID" Parameter="p_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SEC_ID" Parameter="sEC_ID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_STSEARCH" Method="SP_STSEARCH">
+    <Parameter Name="SEARCH_KEY" Parameter="sEARCH_KEY" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="SP_STSEARCHResult">
+      <Column Name="ST_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ST_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ST_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_YEARLEVEL" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_SCHOOLYEAR" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_BIRTHDATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ST_AGE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ST_BIRTHPLACE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_ADDRESS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_GENDER" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_CONTACTNUMBER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ST_HEIGHT" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_WEIGHT" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ST_BLOODPRESSURE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="P_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SEC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_USERSEARCH" Method="SP_USERSEARCH">
+    <Parameter Name="SEARCHKEY" Parameter="sEARCHKEY" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="SP_USERSEARCHResult">
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="USER_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_USERNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_CONTACT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="USER_DATEADDED" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="USER_CREATOR" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_TYPEID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_IMAGE" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_USERVIEW" Method="SP_USERVIEW">
+    <ElementType Name="SP_USERVIEWResult">
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="USER_LASTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_FIRSTNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_MIDDLENAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_USERNAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_PASSWORD" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_CONTACT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ISACTIVE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="USER_DATEADDED" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="USER_CREATOR" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_TYPEID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_IMAGE" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_USERSAVE" Method="SP_USERSAVE">
+    <Parameter Name="USER_LASTNAME" Parameter="uSER_LASTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_FIRSTNAME" Parameter="uSER_FIRSTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_MIDDLENAME" Parameter="uSER_MIDDLENAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_USERNAME" Parameter="uSER_USERNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_PASSWORD" Parameter="uSER_PASSWORD" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_CONTACTNO" Parameter="uSER_CONTACTNO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_CREATOR" Parameter="uSER_CREATOR" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_TYPE" Parameter="uSER_TYPE" Type="System.Int32" DbType="Int" />
+    <Parameter Name="USER_IMAGE" Parameter="uSER_IMAGE" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_STUPDATE" Method="SP_STUPDATE">
+    <Parameter Name="ST_ID" Parameter="sT_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ST_FIRSTNAME" Parameter="sT_FIRSTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_MIDDLENAME" Parameter="sT_MIDDLENAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_LASTNAME" Parameter="sT_LASTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_YEARLEVEL" Parameter="sT_YEARLEVEL" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_SCHOOLYEAR" Parameter="sT_SCHOOLYEAR" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_BIRTHDATE" Parameter="sT_BIRTHDATE" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ST_AGE" Parameter="sT_AGE" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ST_BIRTHPLACE" Parameter="sT_BIRTHPLACE" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_ADDRESS" Parameter="sT_ADDRESS" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_GENDER" Parameter="sT_GENDER" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ST_CONTACTNUMBER" Parameter="sT_CONTACTNUMBER" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ISACTIVE" Parameter="iSACTIVE" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="ST_HEIGHT" Parameter="sT_HEIGHT" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="ST_WEIGHT" Parameter="sT_WEIGHT" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="ST_BLOODPRESSURE" Parameter="sT_BLOODPRESSURE" Type="System.Int32" DbType="Int" />
+    <Parameter Name="P_ID" Parameter="p_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SEC_ID" Parameter="sEC_ID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_USERUPDATE" Method="SP_USERUPDATE">
+    <Parameter Name="USER_ID" Parameter="uSER_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="USER_LASTNAME" Parameter="uSER_LASTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_FIRSTNAME" Parameter="uSER_FIRSTNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_MIDDLENAME" Parameter="uSER_MIDDLENAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_USERNAME" Parameter="uSER_USERNAME" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USER_CONTACT" Parameter="uSER_CONTACT" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ISACTIVE" Parameter="iSACTIVE" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="USER_IMAGE" Parameter="uSER_IMAGE" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
